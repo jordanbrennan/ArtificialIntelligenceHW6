@@ -109,7 +109,7 @@ public class Backtracking {
                 if (mrv[i] < mrv[variable]) variable = i;
                 else if (mrv[i] == mrv[variable])
                     //check degree heuristic
-                    if (degrees[i] < degrees[variable]) variable = i;
+                    if (degrees[i] > degrees[variable]) variable = i;
             }
         }
 
