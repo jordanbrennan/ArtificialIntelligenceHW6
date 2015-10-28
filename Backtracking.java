@@ -1,6 +1,5 @@
 import java.util.Arrays;
 
-
 public class Backtracking {
 
     private char[] assignment;
@@ -37,7 +36,8 @@ public class Backtracking {
         //start search and print results if solution found
         if (RecursiveBacktracking(constraints)) {
             System.out.println("Solution: ");
-            System.out.println(Arrays.toString(assignment));
+            for (int i = 0; i < assignment.length; i++)
+                System.out.println("Variable " + (i + 1) + ": " + assignment[i]);
         }
         else System.out.println("Failure");
 
@@ -74,7 +74,7 @@ public class Backtracking {
                 //add value to variable in assignment
                 assignment[variable] = values[i];
 
-                System.out.println("Variable: " + variable + " <- Value: " + values[i]);
+                System.out.println((variable + 1) + "<-" + values[i] + "  ");
 
                 //proceed to next state using recursion, if success then return
                 if (RecursiveBacktracking(constraints)) return true;
@@ -126,7 +126,7 @@ public class Backtracking {
     private boolean ValueIsConsistent(int value, int variable, int[][]constraints) {
 
         //iterate through variables
-        for (int i = 1; i < constraints.length; i++) {
+        for (int i = 0; i < constraints.length; i++) {
             //check if variable has connection with same value
             if (constraints[variable][i] == 1 && assignment[i] == value)
                 return false;
