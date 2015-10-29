@@ -1,28 +1,37 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class Backtracking {
 
-    private char[] assignment;
+    protected char[] assignment;
     private int[] degrees;
-    private int[] mrv;
-    private char[] values;
+    //private int[] mrv;
+    protected List<List<Character>> remainingVals;
+    protected char[] values;
 
     public Backtracking(int[][] constraints, char[] values) {
         assignment = new char[constraints.length];
         Arrays.fill(assignment, 'Z');
 
-        //find number of degrees
+        //convert values array to Arraylist
+        ArrayList valueList = new ArrayList<>(constraints.length);
+        for (int i=0; i < values.length; i++){
+            valueList.add(values[i]);
+        }
+
+        //find number of degrees and create ArrayLists with remaining values
         degrees = new int[constraints.length];
+        remainingVals = new ArrayList<List<Character>>(constraints.length);
         Arrays.fill(degrees, 0);
         for (int i = 0; i < constraints.length; i++) {
             for (int j = 0; j < constraints.length; j++) {
                 if (constraints[i][j] == 1) degrees[i]++;
             }
+            remainingVals.add(new ArrayList<>(valueList));
         }
 
-        mrv = new int[constraints.length];
-        Arrays.fill(mrv, values.length);
-
+        //mrv = new int[constraints.length];
+        //Arrays.fill(mrv, values.length);
+        
         this.values = values;
     }
 
@@ -50,7 +59,7 @@ public class Backtracking {
      * @param constraints
      * @return true/false success
      */
-    private boolean RecursiveBacktracking( int[][] constraints) {
+    protected boolean RecursiveBacktracking( int[][] constraints) {
 
         boolean complete = true;
 
@@ -91,7 +100,7 @@ public class Backtracking {
      * selects an unassigned variable with MRV and degree heuristics
      * @return the variable
      */
-    private int SelectUnassignedVariable() {
+    protected int SelectUnassignedVariable() {
 
         int variable = 0;
         boolean init = true;
@@ -106,8 +115,10 @@ public class Backtracking {
                     init = false;
                 }
                 //check MRV heuristic
-                if (mrv[i] < mrv[variable]) variable = i;
-                else if (mrv[i] == mrv[variable])
+                //if (mrv[i] < mrv[variable]) variable = i;
+                if (remainingVals.get(i).size() < remainingVals.get(variable).size()) variable = i;
+                //else if (mrv[i] == mrv[variable])
+                else if (remainingVals.get(i).size() == remainingVals.get(variable).size())
                     //check degree heuristic
                     if (degrees[i] < degrees[variable]) variable = i;
             }
@@ -123,7 +134,7 @@ public class Backtracking {
      * @param constraints
      * @return
      */
-    private boolean ValueIsConsistent(int value, int variable, int[][]constraints) {
+    protected boolean ValueIsConsistent(int value, int variable, int[][]constraints) {
 
         //iterate through variables
         for (int i = 0; i < constraints.length; i++) {

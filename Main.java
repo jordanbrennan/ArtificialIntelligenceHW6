@@ -26,6 +26,10 @@ public class Main {
 
             //implement backtracking search
             BTS.BacktrackingSearch(constraints);
+            
+            //implement forward checking
+            ForwardChecking FC = new ForwardChecking(constraints, values);
+            FC.BacktrackingSearch(constraints);
 
         } catch (IOException e) {
             System.out.println(e);
