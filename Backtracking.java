@@ -120,7 +120,7 @@ public class Backtracking {
                 //else if (mrv[i] == mrv[variable])
                 else if (remainingVals.get(i).size() == remainingVals.get(variable).size())
                     //check degree heuristic
-                    if (degrees[i] < degrees[variable]) variable = i;
+                    if (degrees[i] > degrees[variable]) variable = i;
             }
         }
 
