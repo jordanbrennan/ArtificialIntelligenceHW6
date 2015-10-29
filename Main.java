@@ -30,6 +30,10 @@ public class Main {
             //implement forward checking
             ForwardChecking FC = new ForwardChecking(constraints, values);
             FC.BacktrackingSearch(constraints);
+            
+            //implement AC3
+            AC3 ac3 = new AC3(constraints, values);
+            ac3.BacktrackingSearch(constraints);
 
         } catch (IOException e) {
             System.out.println(e);
