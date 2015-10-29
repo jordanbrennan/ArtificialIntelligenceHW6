@@ -21,7 +21,7 @@ public class Main {
             constraints = readFile(args[0]);
 
             //for problem one, add 'd' for problem two
-            char[] values = {'a', 'b', 'c'};
+            char[] values = {'a', 'b', 'c', 'd'};
             Backtracking BTS = new Backtracking(constraints, values);
 
             //implement backtracking search

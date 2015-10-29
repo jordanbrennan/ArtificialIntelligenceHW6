@@ -71,7 +71,7 @@ public class ForwardChecking extends Backtracking {
                 //if currChar was present, remember that we changed it
                 varsChanged.add(i);
                 if (remainingVals.get(i).isEmpty()) {
-                    //Our assignment resulted in another variable with no possible
+                    //Our assignment resulted in some variable having no possible
                     // values. Undo our changes and return failure indicator
                     for (Integer var : varsChanged) {
                         remainingVals.get(var).add(currChar);

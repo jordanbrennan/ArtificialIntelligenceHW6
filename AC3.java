@@ -63,7 +63,7 @@ public class AC3 extends Backtracking{
         List<Map.Entry<Integer, Character>> changes;
         Integer[] currArc;
 
-        //itialize queue with all existing arcs
+        //initialize queue with all existing arcs
         LinkedList<Integer[]> queue = new LinkedList();
         for (int i=0; i<constraints.length; i++) {
             for (int j=0; i<constraints.length; i++) {
@@ -100,10 +100,13 @@ public class AC3 extends Backtracking{
         List<Map.Entry<Integer, Character>> changesMade = new ArrayList<>();
         boolean foundOne;
         
-        for (Character x : remainingVals.get(xi)) {
+        //for (Character x : remainingVals.get(xi)) {
+        for (int i=0; i<remainingVals.get(xi).size(); i++) {
+            Character x = remainingVals.get(xi).get(i);
             foundOne = false;
             for (Character y: remainingVals.get(xj)) {
                 if (! x.equals(y)) foundOne = true;
+                break;
             }
             if (! foundOne) {
                 remainingVals.get(xi).remove(x);
@@ -112,6 +115,7 @@ public class AC3 extends Backtracking{
                     UndoChanges(changesMade);
                     return null; //indicate failure
                 }
+                i--; //don't skip elements if you delete one
             }
         }
         return changesMade;
